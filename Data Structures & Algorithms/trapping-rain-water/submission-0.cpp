@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n = height.size();
+        int ans = 0;
+        vector<int> rMax(n, 0);
+        rMax[n - 1] = height[n - 1];
+        for(int i = n - 2; i >= 0; i--){
+            rMax[i] = max(rMax[i + 1], height[i]);
+        }
+        int lMax = 0;
+        for(int i = 0; i < n; i++){
+            lMax = max(lMax, height[i]);
+            ans += min(lMax, rMax[i]) - height[i];
+        }
+        return ans;
+    }
+};
